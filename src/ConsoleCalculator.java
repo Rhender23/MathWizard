@@ -42,16 +42,16 @@ public class ConsoleCalculator implements Helpable {
             }
 
             System.out.print("Enter a second number: ");
-            String secondNumberString = ScannerProcessDouble.getString(scanner);
+            String operatorNumberString = ScannerProcessDouble.getString(scanner);
 
-            if (operandNumberString == null || operatorString.isEmpty() || secondNumberString == null) {
+            if (operandNumberString == null || operatorString.isEmpty() || operatorNumberString == null) {
                 continue;
             }
-            else if (secondNumberString.equalsIgnoreCase("help")) {
+            else if (operatorNumberString.equalsIgnoreCase("help")) {
                 this.printHelp();
             }
             double operandNumber = Double.parseDouble(operandNumberString);
-            double operatorNumber = Double.parseDouble(secondNumberString);
+            double operatorNumber = Double.parseDouble(operatorNumberString);
 
             //handling operators from enum with switch and case
 
