@@ -26,32 +26,31 @@ public class ConsoleCalculator implements Helpable {
             }
 
             String operatorString = "";
-            while (true) {
+            Operators op = null;
+            while (op == null) {
                 System.out.print("Enter an operation (+, -, *, /, ^, r, %): ");
                 operatorString = scanner.nextLine().trim();
                 if (operatorString.equalsIgnoreCase("help")) {
                     this.printHelp();
                     continue;
                 }
-                try {
-                    Operators op = Operators.onlySymbol(operatorString);
-                    break;
-                } catch (IllegalArgumentException e) {
+                op = Operators.onlySymbol(operatorString);
+                if (op == null) {
                     System.out.println("Invalid operator, please try again.");
                 }
             }
 
             System.out.print("Enter a second number: ");
-            String operatorNumberString = ScannerProcessDouble.getString(scanner);
+            String secondNumberString = ScannerProcessDouble.getString(scanner);
 
-            if (operandNumberString == null || operatorString.isEmpty() || operatorNumberString == null) {
+            if (operandNumberString == null || operatorString.isEmpty() || secondNumberString == null) {
                 continue;
             }
-            else if (operatorNumberString.equalsIgnoreCase("help")) {
+            else if (secondNumberString.equalsIgnoreCase("help")) {
                 this.printHelp();
             }
             double operandNumber = Double.parseDouble(operandNumberString);
-            double operatorNumber = Double.parseDouble(operatorNumberString);
+            double operatorNumber = Double.parseDouble(secondNumberString);
 
             //handling operators from enum with switch and case
 

@@ -57,7 +57,9 @@ public enum Operators {
 
     public static Operators onlySymbol(String symbol) {
         for (Operators op : values()) {
-            return op;
+            if (op.symbol.equals(symbol)) {
+                return op;
+            }
         }
         return null;
     }
