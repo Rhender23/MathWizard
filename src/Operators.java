@@ -5,53 +5,44 @@
 public enum Operators {
     ADD("+") {
         @Override
-        public double calculate(double first, double second) {
-            return first + second;
+        public double calculate(double inputNumberOperand, double inputNumberOperator) {
+            return inputNumberOperand + inputNumberOperator;
         }
     },
     SUBTRACT("-") {
         @Override
-        public double calculate(double first, double second) {
-            return first - second;
+        public double calculate(double inputNumberOperand, double inputNumberOperator) {
+            return inputNumberOperand - inputNumberOperator;
         }
     },
     MULTIPLY("*") {
         @Override
-        public double calculate(double first, double second) {
-            return first * second;
+        public double calculate(double inputNumberOperand, double inputNumberOperator) {
+            return inputNumberOperand * inputNumberOperator;
         }
     },
-    DIVIDE ("/"){
+    DIVIDE("/") {
         @Override
-        public double calculate(double first, double second) {
-            if (second == 0) {
-                throw new IllegalArgumentException("Division by zero is not allowed");
-            }
-            return first / second;
+        public double calculate(double inputNumberOperand, double inputNumberOperator) {
+            return inputNumberOperand / inputNumberOperator;
         }
     },
-    POWER ("^"){
+    POWER("^") {
         @Override
-        public double calculate(double first, double second) {
-            return Math.pow(first, second);
+        public double calculate(double inputNumberOperand, double inputNumberOperator) {
+            return Math.pow(inputNumberOperand, inputNumberOperator);
         }
     },
-    ROOT ("r"){
+    ROOT("r") {
         @Override
-        public double calculate(double first, double second) {
-            if (second == 0) {
-                throw new IllegalArgumentException("Root zero is not allowed");
-            }
-            return Math.pow(first, 1.0 / second);
+        public double calculate(double inputNumberOperand, double inputNumberOperator) {
+            return Math.pow(inputNumberOperand, 1.0 / inputNumberOperator);
         }
     },
-    MODULUS ("%"){
+    MODULUS("%") {
         @Override
-        public double calculate(double first, double second) {
-            if (second == 0) {
-                throw new IllegalArgumentException("Cannot divide by zero.");
-            }
-            return first % second;
+        public double calculate(double inputNumberOperand, double inputNumberOperator) {
+            return inputNumberOperand % inputNumberOperator;
         }
     };
     private final String symbol;
@@ -66,12 +57,9 @@ public enum Operators {
 
     public static Operators onlySymbol(String symbol) {
         for (Operators op : values()) {
-            if (op.getSymbol().equals(symbol)) {
-                return op;
-            }
+            return op;
         }
-        throw new IllegalArgumentException("Invalid operator symbol");
+        return null;
     }
-
-    public abstract double calculate(double first, double second);
+    public abstract double calculate ( double inputNumberOperand, double inputNumberOperator);
 }

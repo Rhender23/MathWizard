@@ -4,7 +4,7 @@
 
 import java.util.Scanner;
 
-public class ConsoleCalculator {
+public class ConsoleCalculator implements Helpable {
     /**
      The calculator() method runs the calculator, prompting the user for input and outputting the result of the calculation.
      The user can continue to perform calculations until they choose to exit the program.
@@ -19,9 +19,9 @@ public class ConsoleCalculator {
         while (continueCalculating) {
 
             System.out.print("Enter the first number: ");
-            String firstNumberString = ScannerProcessDouble.getString(scanner);
-            if (firstNumberString.equalsIgnoreCase("help")) {
-                Help.printHelp();
+            String operandNumberString = ScannerProcessDouble.getString(scanner);
+            if (operandNumberString.equalsIgnoreCase("help")) {
+                this.printHelp();
                 continue;
             }
 
@@ -30,7 +30,7 @@ public class ConsoleCalculator {
                 System.out.print("Enter an operation (+, -, *, /, ^, r, %): ");
                 operatorString = scanner.nextLine().trim();
                 if (operatorString.equalsIgnoreCase("help")) {
-                    Help.printHelp();
+                    this.printHelp();
                     continue;
                 }
                 try {
@@ -44,14 +44,14 @@ public class ConsoleCalculator {
             System.out.print("Enter a second number: ");
             String secondNumberString = ScannerProcessDouble.getString(scanner);
 
-            if (firstNumberString == null || operatorString.isEmpty() || secondNumberString == null) {
+            if (operandNumberString == null || operatorString.isEmpty() || secondNumberString == null) {
                 continue;
             }
             else if (secondNumberString.equalsIgnoreCase("help")) {
-                Help.printHelp();
+                this.printHelp();
             }
-            double first = Double.parseDouble(firstNumberString);
-            double second = Double.parseDouble(secondNumberString);
+            double operandNumber = Double.parseDouble(operandNumberString);
+            double operatorNumber = Double.parseDouble(secondNumberString);
 
             //handling operators from enum with switch and case
 
@@ -82,7 +82,7 @@ public class ConsoleCalculator {
                     System.out.println("Invalid operator, please try again.");
                     return;
             }
-            double result = operators.calculate(first, second);
+            double result = operators.calculate(operandNumber, operatorNumber);
             System.out.println("The result is: " + result);
             System.out.println();
 
@@ -95,4 +95,15 @@ public class ConsoleCalculator {
 
         scanner.close();
     }
+
+public void printHelp() {
+
+ System.out.println("MathWiz Help");
+ System.out.println("Supported operations: +, -, *, /, ^, r, %");
+ System.out.println("To use Pi, enter 'pi'");
+ System.out.println("To use e as a number, enter 'e'");
+ System.out.println("To display this help message again, enter 'help'");
+ System.out.println();
+
+ }
 }
